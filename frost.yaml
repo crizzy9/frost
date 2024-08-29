@@ -1,0 +1,48 @@
+global:
+  project-root: ~/.dotfiles
+  author: Shyam Padia
+
+system:
+  - name: arch
+    script: systems/arch/install.sh
+
+plugins:
+  - name: tmux
+    source: plex/tmux/config/*
+    target: ~/.config/tmux/*
+    config: plex/tmux/config
+    keymaps: plex/tmux/keymaps.json
+    dependencies:
+      - arch:
+          script: plex/tmux/install.sh
+          pacman: >
+            tmux
+            tree
+          go: >
+            "github.com/joshmedeski/sesh@latest"
+
+  - name: neovim
+    source: editor/neovim/config/*
+    target: ~/.config/neovim/*
+    config: editor/neovim/config
+    keymaps: editor/neovim/keymaps.json
+    dependencies:
+      - arch:
+          script: neovim/install.sh
+          pacman: >
+            neovim
+            fzf
+            ripgrep
+      #     yay:
+      #     go:
+      #     cargo:
+      # - ubuntu:
+      #     script:
+      #     apt:
+      #     go:
+      #     cargo:
+      # - macos:
+      #     script:
+      #     brew:
+      #     go:
+      #     cargo:
